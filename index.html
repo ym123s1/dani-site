@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="לשם שירותי מחשוב - פתרונות טכנולוגיים, אבטחת מידע, ניהול סיכונים תפעוליים ותשתיות ענן מתקדמות לעסקים וארגונים. שקט תעשייתי לעסק שלך.">
+    <meta name="keywords" content="שירותי מחשוב, אבטחת מידע, סייבר, גיבוי בענן, תמיכת מחשבים, רשתות תקשורת, לשם שירותי מחשוב, דן שירותי מחשוב">
+    <meta name="author" content="לשם שירותי מחשוב">
+    <title>לשם שירותי מחשוב - פתרונות טכנולוגיים ומערכתיים לעסקים</title>
+    
+    <!-- פונטים ואייקונים -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0b132b;          /* כחול נייבי עמוק מאוד */
+            --primary-light: #1c2541;    /* כחול נייבי בהיר יותר */
+            --secondary: #1f3d63;        /* כחול רויאל מותאם ללוגו */
+            --accent: #a2c439;           /* ירוק ליים זוהר מהלוגו */
+            --accent-hover: #8eb12f;     /* ירוק ליים כהה יותר ל-hover */
+            --accent-glow: rgba(162, 196, 57, 0.4);
+            --text-dark: #1e293b;        /* אפור פחם לטקסט */
+            --text-light: #64748b;       /* אפור בהיר לטקסט משני */
+            --bg-light: #f8fafc;         /* רקע בהיר */
+            --bg-card: #ffffff;          /* רקע כרטיסיה */
+            --border-color: #e2e8f0;     /* צבע גבולות עדין */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Heebo', system-ui, -apple-system, sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* סרגל ניווט עליון */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            background: transparent;
+            padding: 15px 0;
+        }
+
+        header.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+        }
+
+        /* בס"ד */
+        .bsd {
+            position: absolute;
+            top: 8px;
+            right: 20px;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.75rem;
+            font-weight: 300;
+            z-index: 1005;
+            transition: var(--transition);
+        }
+
+        header.scrolled .bsd {
+            color: rgba(255, 255, 255, 0.75);
+            top: 5px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-container {
+            pointer-events: none;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+
+        header.scrolled .logo-container {
+            pointer-events: auto;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .logo-container img {
+            height: 48px;
+            width: auto;
+            display: block;
+            transition: var(--transition);
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+        }
+
+        header.scrolled .logo-container img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* כפתור יצירת קשר בפינה */
+        .nav-cta {
+            background-color: var(--accent);
+            color: var(--primary) !important;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px var(--accent-glow);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .nav-cta:hover {
+            background-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* תפריט המבורגר למובייל */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: radial-gradient(circle at center, #1b3252 0%, #0d1627 100%);
+            position: relative;
+            padding: 160px 20px 120px;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* עיטורים זוהרים ברקע ה-Hero */
+        .hero-section::before, .hero-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .hero-section::before {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            top: -50px;
+            left: -50px;
+        }
+
+        .hero-section::after {
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+            bottom: -100px;
+            right: -50px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-logo {
+            max-height: 120px;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.75));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            max-width: 750px;
+            font-weight: 300;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            background-color: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px var(--accent-glow);
+            border: 2px solid transparent;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+            background-color: #ffffff;
+            color: var(--primary);
+        }
+
+        /* גריד כללי ומגבלות רוחב */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* רמז גלילה למובייל */
+        .mobile-scroll-hint {
+            display: none;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 10px;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .sliding-hint-arrow {
+            animation: swipeLeft 1.5s infinite ease-in-out;
+        }
+
+        @keyframes swipeLeft {
+            0% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(-6px); opacity: 0.4; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* כרטיסיות בידול - Features */
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 40px 35px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 300px;
+            max-width: 360px;
+            height: auto;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
+            border-color: var(--accent);
+        }
+
+        .feature-card:hover::before {
+            background-color: var(--accent);
+        }
+
+        .feature-card .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background-color: #eff6ff;
+            color: var(--secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .icon-wrapper {
+            background-color: var(--accent);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* באנר המדדים - Metrics */
+        .brand-banner {
+            background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 24px;
+            margin: 40px 0 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -20px rgba(11, 19, 43, 0.4);
+        }
+
+        .brand-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 80% 20%, rgba(162, 196, 57, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .brand-banner h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .brand-banner p.banner-subtitle {
+            max-width: 750px;
+            margin: 0 auto 50px;
+            color: #94a3b8;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .metric-item {
+            position: relative;
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .metric-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-item i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .metric-num {
+            color: white;
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .metric-text {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* כרטיסיות שירותים - Services */
+        .services-section {
+            background-color: var(--bg-light);
+            padding: 100px 0;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 320px;
+            max-width: 360px;
+            aspect-ratio: 1 / 1;
+            justify-content: flex-start;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08);
+        }
+
+        .service-card .icon {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .icon {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .service-card ul {
+            list-style: none;
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .service-card li {
+            position: relative;
+            padding-right: 20px;
+            margin-bottom: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .service-card li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 1px;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        /* אזור לקוחות מרוצים - Testimonials Slider */
+        .testimonials-section {
+            background: linear-gradient(135deg, #101f30 0%, #1e355c 100%);
+            padding: 100px 0;
+            margin: 80px 0 0;
+            color: #ffffff;
+        }
+
+        .testimonials-section .section-title {
+            color: #ffffff;
+        }
+
+        .testimonials-slider {
+            width: calc(100% - 160px);
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            padding: 50px 70px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            overflow: visible;
+        }
+
+        .testimonials-wrapper {
+            position: relative;
+            min-height: 200px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            position: relative;
+            padding: 10px 45px 10px 0;
+        }
+
+        .testimonial-quote .quote-icon {
+            font-size: 2.2rem;
+            color: var(--accent);
+            opacity: 0.75;
+            position: absolute;
+            top: 10px;
+            right: 0;
+            z-index: 1;
+        }
+
+        .testimonial-quote p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent);
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* חצים לסליידר */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .slider-arrow:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-arrow {
+            right: -60px;
+        }
+
+        .next-arrow {
+            left: -60px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .slider-dots .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dots .dot.active {
+            background-color: var(--accent);
+            transform: scale(1.2);
+            width: 24px;
+            border-radius: 6px;
+        }
+
+        /* אזור השותפים לדרך (Client Logos) */
+        .partners-section {
+            padding: 40px 0 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .partners-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .partners-title {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .partners-scroll-hint {
+            display: none;
+        }
+
+        @keyframes arrowBlink {
+            0% { opacity: 0.3; transform: translateX(0); }
+            50% { opacity: 1; transform: translateX(-5px); }
+            100% { opacity: 0.3; transform: translateX(0); }
+        }
+
+        .blinking-arrow {
+            animation: arrowBlink 1.5s infinite ease-in-out;
+            color: var(--accent);
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .partners-slider-container {
+            position: relative;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        .partners-slider-container .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        .partners-slider-container .slider-arrow:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .partners-slider-container .prev-arrow {
+            right: 0;
+        }
+
+        .partners-slider-container .next-arrow {
+            left: 0;
+        }
+
+        .partners-logos {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 45px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 15px 5px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        .partners-logos::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            cursor: default;
+            flex: 0 0 auto;
+        }
+
+        .partner-logo img {
+            height: 48px; /* Increased from 38px (1.3x) */
+            width: auto;
+            max-width: 170px; /* Increased from 130px (1.3x) */
+            object-fit: contain;
+            opacity: 0.65;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+            transition: var(--transition);
+        }
+
+        .partner-logo:hover img {
+            opacity: 1;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)) scale(1.05);
+        }
+
+
+        /* טופס יצירת קשר - Contact */
+        .contact-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-section-inner {
+            background: #ffffff;
+            padding: 60px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-section-inner h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .contact-section-inner p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-family: inherit;
+            color: var(--text-dark);
+            transition: var(--transition);
+            background-color: #ffffff;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(31, 61, 99, 0.15);
+        }
+
+        .submit-btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(31, 61, 99, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.25);
+        }
+
+        /* מודאל הודעת הצלחה */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 50px 40px;
+            border-radius: 24px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #f0fdf4;
+            color: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 25px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-text {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .modal-btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-btn:hover {
+            background-color: var(--primary);
+        }
+
+        /* כפתור וואטסאפ צף */
+        .whatsapp-bubble {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            z-index: 999;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-bubble:hover {
+            transform: scale(1.1) rotate(10deg);
+            background-color: #20ba5a;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* פוטר */
+        footer {
+            background-color: #030712;
+            color: #94a3b8;
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid #1f2937;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .footer-logo {
+            height: 40px;
+            width: auto;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-logo:hover {
+            opacity: 1;
+        }
+
+        .footer-text {
+            font-size: 0.95rem;
+        }
+
+        .footer-credits {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* התאמה לרספונסיביות - Responsive queries */
+        @media (max-width: 968px) {
+            .hero-text h1 {
+                font-size: 2.6rem;
+            }
+            .hero-text p {
+                font-size: 1.15rem;
+            }
+            .section-title {
+                font-size: 2.1rem;
+            }
+            .brand-banner {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                background: rgba(15, 23, 42, 0.95);
+                padding: 10px 0;
+            }
+            
+            .hamburger {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                color: #ffffff;
+                margin-left: 8px;
+                padding: 0;
+                font-size: 1.25rem;
+                transition: var(--transition);
+            }
+            .hamburger:hover, .hamburger:focus {
+                background: rgba(255, 255, 255, 0.15);
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+
+            .bsd {
+                position: absolute !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                right: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                line-height: 1 !important;
+                display: block !important;
+                font-size: 0.75rem !important;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.98);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 20px;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+                border-top: 1px solid #1f2937;
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.4s ease;
+                pointer-events: none;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-link {
+                font-size: 1.1rem;
+                display: block;
+                text-align: center;
+                padding: 8px 0;
+            }
+
+            .nav-cta {
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .hero-section {
+                padding: 140px 20px 80px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.1rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            .hero-btn {
+                padding: 14px 35px;
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 60px 20px;
+            }
+
+            /* גלילה אופקית במובייל עם הצמדה (Scroll Snap) */
+            .features-grid, .services-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                scroll-snap-type: x mandatory !important;
+                gap: 20px !important;
+                padding: 10px 5px 25px !important;
+                scroll-behavior: smooth !important;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .features-grid::-webkit-scrollbar, .services-grid::-webkit-scrollbar {
+                display: none;
+            }
+            .feature-card, .service-card {
+                flex: 0 0 85% !important;
+                width: 85% !important;
+                max-width: 85% !important;
+                scroll-snap-align: start !important;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+                aspect-ratio: auto !important;
+            }
+
+            .mobile-scroll-hint {
+                display: flex !important;
+            }
+
+            .testimonials-slider {
+                width: 100% !important;
+                padding: 40px 20px !important;
+            }
+
+            /* מיקום החצים מחדש בתוך כרטיסיית לקוחות במובייל */
+            .prev-arrow {
+                right: 15px !important;
+            }
+
+            .next-arrow {
+                left: 15px !important;
+            }
+
+            .contact-section-inner {
+                padding: 40px 20px;
+            }
+
+            .whatsapp-bubble {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+            }
+
+            /* שורת שותפים רוחבית במובייל */
+            .partners-slider-container {
+                padding: 0 !important;
+            }
+            .partners-slider-container .slider-arrow {
+                display: none !important;
+            }
+            .partners-logos {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                justify-content: flex-start !important;
+                gap: 30px !important;
+                padding: 10px 10px 20px !important;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .partners-logos::-webkit-scrollbar {
+                display: none;
+            }
+            .partner-logo {
+                flex: 0 0 auto !important;
+                white-space: nowrap !important;
+            }
+            .partner-logo img {
+                height: 34px !important;
+                max-width: 110px !important;
+            }
+
+            .partners-scroll-hint {
+                display: flex !important;
+                align-items: center;
+            }
+
+            .testimonial-quote {
+                padding: 10px 32px 10px 0 !important;
+            }
+            .testimonial-quote .quote-icon {
+                font-size: 1.6rem !important;
+                top: 8px !important;
+                right: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- סרגל ניווט עליון -->
+    <header id="mainHeader">
+        <div class="bsd">בס"ד</div>
+        <div class="nav-container">
+            <a href="#" class="logo-container">
+                <img src="logo_transparent.png" alt="לוגו לשם שירותי מחשוב">
+            </a>
+            
+            <button class="hamburger" id="hamburgerMenu" aria-label="תפריט ניווט">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link">דף הבית</a></li>
+                <li><a href="#why-us" class="nav-link">למה אנחנו?</a></li>
+                <li><a href="#services" class="nav-link">שירותים</a></li>
+                <li><a href="#contact" class="nav-link nav-cta">צור קשר</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- חלק ה-Hero -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <img src="logo_transparent.png" alt="לוגו לשם שירותי מחשוב" class="hero-logo">
+            <div class="hero-text">
+                <h1>אנחנו מנהלים את הטכנולוגיה, כדי שאתה תוכל לנהל את העסק</h1>
+                <p>מעטפת מחשוב, אבטחת מידע וניהול סיכונים תפעוליים לעסקים וארגונים קטנים ובינוניים.</p>
+                <a href="#contact" class="hero-btn">צרו קשר להבטחת שקט תפעולי</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- תוכן ראשי -->
+    <div class="container" id="why-us">
+        
+        <!-- חלק היתרונות -->
+        <section style="margin-bottom: 80px;">
+            <div class="section-header">
+                <h2 class="section-title">למה עסקים בוחרים בנו?</h2>
+                <div class="mobile-scroll-hint">
+                    <span>החליקו לצד לצפייה</span>
+                    <i class="fa-solid fa-arrow-left sliding-hint-arrow"></i>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>ניהול סיכונים אקטיבי</h3>
+                    <p>אנחנו לא מחכים לתקלה. אנו מנהלים את הסיכונים מראש כדי למנוע השבתת עבודה של העסק שלכם.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-bell"></i></div>
+                    <h3>ניטור 24/7</h3>
+                    <p>מערכות ניטור חכמות מאתרות ומטפלות בבעיות ברקע, לעיתים עוד לפני שהלקוח מודע לקיומן.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-cubes"></i></div>
+                    <h3>סביבת עבודה אינטואיטיבית</h3>
+                    <p>יצירת סביבה טכנולוגית מסונכרנת, מאורגנת ויציבה המאפשרת רציפות עבודה חלקה וזורמת.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- באנר המדדים -->
+        <section class="brand-banner">
+            <h2>הסטנדרט המקצועי שלנו</h2>
+            <p class="banner-subtitle">השירות מבוסס על הסתכלות מערכתית מקיפה שלוקחת בחשבון את יכולות הלקוח, צורת העבודה והצרכים הגלויים והסמויים שלו.</p>
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <i class="fa-solid fa-award"></i>
+                    <div class="metric-num">25</div>
+                    <div class="metric-text">שנות ניסיון טכנולוגי</div>
+                </div>
+                <div class="metric-item">
+                    <i class="fa-solid fa-eye"></i>
+                    <div class="metric-num">100%</div>
+                    <div class="metric-text">שקיפות מלאה מול הלקוח</div>
+                </div>
+                <div class="metric-item">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div class="metric-num">יצירתיות</div>
+                    <div class="metric-text">פתרונות מדויקים וחיסכון</div>
+                </div>
+            </div>
+        </section>
+    </div> <!-- סגירת Container ראשון -->
+
+    <!-- אזור השירותים - רקע מלא -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">השירותים שלנו</h2>
+                <div class="mobile-scroll-hint">
+                    <span>החליקו לצד לצפייה</span>
+                    <i class="fa-solid fa-arrow-left sliding-hint-arrow"></i>
+                </div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon"><i class="fa-solid fa-desktop"></i></div>
+                    <h3>תחזוקה ותמיכה</h3>
+                    <ul>
+                        <li>מוקד תמיכה וזמינות גבוהה לפתרון תקלות</li>
+                        <li>ניטור אוטומטי רציף של תקינות המחשבים והתקנים</li>
+                        <li>ארגון מערך הרשאות וגישה מסודרת ומאובטחת לעובדים</li>
+                        <li>ליווי טכנולוגי וייצוג מקצועי מול ספקי צד שלישי</li>
+                        <li>הדרכת עובדים והטמעת מערכות לעבודה עצמאית ויעילה</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3>תקשורת וסייבר</h3>
+                    <ul>
+                        <li>תכנון, הקמה ותפעול רשתות תקשורת מחשבים</li>
+                        <li>אפיון ארכיטקטורת רשת, ארונות תקשורת ונקודות קצה</li>
+                        <li>הגנת סייבר היקפית (Firewall, אנטי-וירוס וסתימת פרצות)</li>
+                        <li>ליווי והתאמה לדרישות תקני אבטחה בינלאומיים (כגון ISO 27000)</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <h3>תשתיות ענן וגיבוי</h3>
+                    <ul>
+                        <li>הקמה, ניהול ותחזוקת שרתי ענן ושרתי Windows מקומיים</li>
+                        <li>ניהול ורכישת מנויים לשירותי Microsoft 365 ו-Google Workspace</li>
+                        <li>הקמת תיבות דואר אלקטרוני עסקי וממותג לעסק</li>
+                        <li>ניהול מערכי גיבוי בענן ושחזור נתונים מהיר בעת חירום</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- אזור לקוחות מרוצים (Testimonials) - רקע מלא כהה ושותפים -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">לקוחות מרוצים</h2>
+            </div>
+            
+            <div class="testimonials-slider">
+                <!-- חצים למעבר ידני מהיר -->
+                <button class="slider-arrow prev-arrow" id="prevSlideBtn" aria-label="הקודם">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button class="slider-arrow next-arrow" id="nextSlideBtn" aria-label="הבא">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="testimonials-wrapper" id="testimonialsWrapper">
+                    
+                    <!-- לקוח 1 -->
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-quote">
+                            <i class="fa-solid fa-quote-right quote-icon"></i>
+                            <p>דן מעניק לנו שירותי מחשוב מקיפים כבר שנתיים. מאז שהתחלנו לעבוד איתו, אין השבתות עבודה. הניטור האקטיבי שלו פותר בעיות עוד לפני שאנחנו מרגישים אותן. שקט תפעולי אמיתי!</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">מ</div>
+                            <div class="author-info">
+                                <h4>מאיר כהן</h4>
+                                <p>מנכ"ל, כהן ושות' פיננסים</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- לקוח 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-quote">
+                            <i class="fa-solid fa-quote-right quote-icon"></i>
+                            <p>המעבר לענן ואבטחת המידע של המשרד שלנו בוצעו בצורה מושלמת ובשקיפות מלאה. דן תמיד זמין לכל שאלה, ומציג פתרונות יצירתיים שחסכו לנו המון כסף בעלויות התשתית.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ש</div>
+                            <div class="author-info">
+                                <h4>שירה לוי</h4>
+                                <p>מנהלת תפעול, טק-לוגיסטיקס</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- לקוח 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-quote">
+                            <i class="fa-solid fa-quote-right quote-icon"></i>
+                            <p>ממליץ בחום על לשם שירותי מחשוב. רמת המקצועיות, השירותיות והידע בסייבר ואבטחת מידע היא מהגבוהות שפגשנו. שירות מהיר, אמין וישר.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">א</div>
+                            <div class="author-info">
+                                <h4>אביב מזרחי</h4>
+                                <p>בעלים, מזרחי אדריכלים</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- כפתורי מעבר -->
+                <div class="slider-dots" id="sliderDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+
+            <!-- שורת שותפים/לקוחות צפים -->
+            <section class="partners-section">
+                <div class="partners-header">
+                    <p class="partners-title">חברות וארגונים שנותנים בנו אמון</p>
+                    <div class="partners-scroll-hint">
+                        <i class="fa-solid fa-arrow-left-long blinking-arrow"></i>
+                    </div>
+                </div>
+                <div class="partners-slider-container">
+                    <button class="slider-arrow prev-arrow" id="prevPartnerBtn" aria-label="הקודם">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                    <button class="slider-arrow next-arrow" id="nextPartnerBtn" aria-label="הבא">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="partners-logos" id="partnersLogos">
+                        <div class="partner-logo">
+                            <img src="logos/clean_אהלצביה.png" alt="אהל צביה">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_אסףקירור.png" alt="אסף קירור">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_אפקט.png" alt="אפקט">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_ביתהלל.png" alt="בית הלל">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_ביתיעקב.png" alt="בית יעקב">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_בעשט.png" alt="בעש&quot;ט">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_גרינבוקס.png" alt="גרינבוקס">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_היכליעונג.png" alt="היכלי עונג">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_חשיבה.png" alt="חשיבה">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_מדעיםויהדות.png" alt="מדעים ויהדות">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_מייפל.png" alt="מייפל">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_מנחםאקרמן.png" alt="מנחם אקרמן">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_פלנט.png" alt="פלנט">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_פרימגדים.png" alt="פרי מגדים">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_קופתפת.png" alt="קופת פת">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_קרופ.png" alt="קרופ">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_רייציפ.png" alt="רייציפ">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_שובויסודי.png" alt="שובו יסודי">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_שטרנפלד.png" alt="שטרנפלד">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_שירתהתורה.png" alt="שירת התורה">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_שלירבינוביץ.png" alt="שלי רבינוביץ">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_שפר.png" alt="שפר">
+                        </div>
+                        <div class="partner-logo">
+                            <img src="logos/clean_תובנות.png" alt="תובנות">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <!-- Container שלישי ליצירת קשר -->
+    <div class="container">
+        <!-- אזור יצירת קשר -->
+        <section id="contact" class="contact-wrapper" style="margin-top: 100px;">
+            <div class="contact-section-inner">
+                <h2>בוא נשמור על העסק שלך יציב</h2>
+                <p>השאירו פרטים ונחזור אליכם עם פתרון מותאם אישית לעסק שלכם</p>
+                
+                <form id="leadForm">
+                    <div class="form-group">
+                        <input type="text" id="businessName" class="form-control" placeholder="שם העסק" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="contactName" class="form-control" placeholder="שם איש קשר" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="contactPhone" class="form-control" placeholder="מספר טלפון ליצירת קשר" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span>צרו קשר להבטחת שקט תפעולי</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- כפתור וואטסאפ צף -->
+    <!-- שינוי מספר הטלפון: החליפו את ה-XXXXXXXXX במספר שלכם (למשל: 505555555) -->
+    <a href="https://wa.me/972500000000?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%93%D7%9F%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%95%D7%96%D7%94%20%D7%A2%D7%91%D7%95%D7%A8%20%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%20%D7%9E%D7%97%D7%A9%D7%95%D7%91%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99." class="whatsapp-bubble" target="_blank" rel="noopener noreferrer" aria-label="צור קשר בוואטסאפ">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- מודאל הודעת הצלחה -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="modal-title">פנייתך התקבלה בהצלחה!</h3>
+            <p class="modal-text">תודה על פנייתך. נציג מטעמנו יחזור אליך בהקדם האפשרי עם פתרון מותאם אישית לעסק שלך.</p>
+            <button class="modal-btn" id="closeModalBtn">סגור</button>
+        </div>
+    </div>
+
+    <!-- פוטר -->
+    <footer>
+        <div class="footer-container">
+            <img src="logo_transparent.png" alt="לוגו לשם שירותי מחשוב" class="footer-logo">
+            <p class="footer-text">© 2026 לשם שירותי מחשוב. כל הזכויות שמורות.</p>
+        </div>
+    </footer>
+
+    <!-- קוד אינטראקטיביות -->
+    <script>
+        // שינוי עיצוב ה-Header בגלילה
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // פתיחה וסגירה של תפריט המבורגר במובייל
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburgerMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = hamburgerMenu.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // סגירת התפריט בלחיצה על קישור
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = hamburgerMenu.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // סליידר לקוחות מרוצים
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.slider-dots .dot');
+        const prevBtn = document.getElementById('prevSlideBtn');
+        const nextBtn = document.getElementById('nextSlideBtn');
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlideIndex = index;
+        }
+
+        function nextSlide() {
+            let next = currentSlideIndex + 1;
+            if (next >= slides.length) {
+                next = 0;
+            }
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            let prev = currentSlideIndex - 1;
+            if (prev < 0) {
+                prev = slides.length - 1;
+            }
+            showSlide(prev);
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopSlideShow() {
+            clearInterval(slideInterval);
+        }
+
+        // חצים למעבר ידני מהיר
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            stopSlideShow();
+            startSlideShow();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            stopSlideShow();
+            startSlideShow();
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                showSlide(index);
+                stopSlideShow();
+                startSlideShow();
+            });
+        });
+
+        if (slides.length > 0) {
+            startSlideShow();
+        }
+
+        // טיפול בשליחת טופס לידים
+        const leadForm = document.getElementById('leadForm');
+        const successModal = document.getElementById('successModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // איסוף הפרטים
+            const leadData = {
+                businessName: document.getElementById('businessName').value,
+                contactName: document.getElementById('contactName').value,
+                contactPhone: document.getElementById('contactPhone').value
+            };
+
+            // שמירת הפרטים ב-localStorage לצורך מעקב (גיבוי מקומי)
+            const existingLeads = JSON.parse(localStorage.getItem('website_leads') || '[]');
+            existingLeads.push({ ...leadData, date: new Date().toISOString() });
+            localStorage.setItem('website_leads', JSON.stringify(existingLeads));
+            
+            // הדפסה לקונסול
+            console.log('New Lead Submitted:', leadData);
+
+            // שליחה לשרת באמצעות קובץ ה-PHP (send_lead.php)
+            fetch('send_lead.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(leadData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                // שגיאה (למשל כאשר מריצים מקומית ללא שרת PHP) - נרשום בקונסול אך לא נפריע למשתמש
+                console.error('PHP mail submit failed/unsupported in current environment:', error);
+            });
+
+            // איפוס הטופס והצגת המודאל
+            leadForm.reset();
+            successModal.classList.add('active');
+        });
+
+        // סגירת המודאל בלחיצה על הכפתור
+        closeModalBtn.addEventListener('click', () => {
+            successModal.classList.remove('active');
+        });
+
+        // סגירת המודאל בלחיצה מחוץ לתוכן שלו
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.classList.remove('active');
+            }
+        });
+
+        // גלילת שורת שותפים בלחיצה על החצים
+        const partnersLogos = document.getElementById('partnersLogos');
+        const prevPartnerBtn = document.getElementById('prevPartnerBtn');
+        const nextPartnerBtn = document.getElementById('nextPartnerBtn');
+
+        if (partnersLogos && prevPartnerBtn && nextPartnerBtn) {
+            prevPartnerBtn.addEventListener('click', () => {
+                // גלילה ימינה (אחורה ב-RTL)
+                partnersLogos.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+
+            nextPartnerBtn.addEventListener('click', () => {
+                // גלילה שמאלה (קדימה ב-RTL)
+                partnersLogos.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>
