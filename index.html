@@ -861,21 +861,36 @@
             transition: var(--transition);
             cursor: default;
             flex: 0 0 auto;
+            background: rgba(255, 255, 255, 0.07); /* Subtle translucent white card */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px 24px;
+            height: 72px;
+            min-width: 150px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .partner-logo:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary); /* Glowing green border on hover */
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.05);
         }
 
         .partner-logo img {
-            height: 48px; /* Increased from 38px (1.3x) */
+            height: 48px;
             width: auto;
-            max-width: 170px; /* Increased from 130px (1.3x) */
+            max-width: 120px;
             object-fit: contain;
-            opacity: 0.75; /* Slightly higher default opacity for colored logos */
-            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.65));
+            opacity: 0.85; /* Better default visibility for colored elements */
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
             transition: var(--transition);
         }
 
         .partner-logo:hover img {
             opacity: 1;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) scale(1.05);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
         }
 
 
@@ -1307,10 +1322,14 @@
             .partner-logo {
                 flex: 0 0 auto !important;
                 white-space: nowrap !important;
+                height: 52px !important;
+                min-width: 110px !important;
+                padding: 6px 14px !important;
+                border-radius: 8px !important;
             }
             .partner-logo img {
-                height: 34px !important;
-                max-width: 110px !important;
+                height: 32px !important;
+                max-width: 90px !important;
             }
 
             .partners-scroll-hint {
@@ -1653,11 +1672,7 @@
 
     </div>
 
-    <!-- כפתור וואטסאפ צף -->
-    <!-- שינוי מספר הטלפון: החליפו את ה-XXXXXXXXX במספר שלכם (למשל: 505555555) -->
-    <a href="https://wa.me/972500000000?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%93%D7%9F%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%95%D7%96%D7%94%20%D7%A2%D7%91%D7%95%D7%A8%20%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%20%D7%9E%D7%97%D7%A9%D7%95%D7%91%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99." class="whatsapp-bubble" target="_blank" rel="noopener noreferrer" aria-label="צור קשר בוואטסאפ">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+
 
     <!-- מודאל הודעת הצלחה -->
     <div class="modal" id="successModal">
