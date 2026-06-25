@@ -585,7 +585,7 @@
         /* אזור לקוחות מרוצים - Testimonials Slider */
         .testimonials-section {
             background: linear-gradient(135deg, #101f30 0%, #1e355c 100%);
-            padding: 100px 0;
+            padding: 100px 0 60px; /* Reduced bottom padding from 100px to 60px */
             margin: 80px 0 0;
             color: #ffffff;
         }
@@ -861,21 +861,15 @@
             transition: var(--transition);
             cursor: default;
             flex: 0 0 auto;
-            background: rgba(255, 255, 255, 0.1); /* Brighter translucent white card */
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
+            background: transparent;
+            border: none;
             padding: 12px 30px;
             height: 130px; /* Enlarge 2x (from 72px) */
             min-width: 240px; /* Enlarge 1.6x (from 150px) */
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
         }
 
         .partner-logo:hover {
-            background: rgba(255, 255, 255, 0.18);
-            border-color: var(--primary); /* Glowing green border on hover */
             transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08);
         }
 
         .partner-logo img {
@@ -1646,9 +1640,9 @@
     </section>
 
     <!-- Container שלישי ליצירת קשר -->
-    <div class="container">
+    <div class="container" style="padding-top: 60px; padding-bottom: 80px;">
         <!-- אזור יצירת קשר -->
-        <section id="contact" class="contact-wrapper" style="margin-top: 100px;">
+        <section id="contact" class="contact-wrapper" style="margin-top: 0;">
             <div class="contact-section-inner">
                 <h2>בוא נשמור על העסק שלך יציב</h2>
                 <p>השאירו פרטים ונחזור אליכם עם פתרון מותאם אישית לעסק שלכם</p>
