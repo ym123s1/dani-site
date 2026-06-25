@@ -754,11 +754,27 @@
         }
 
         /* אזור השותפים לדרך (Client Logos) */
+        /* אזור השותפים לדרך (Client Logos) */
         .partners-section {
-            padding: 40px 0 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, #111827 0%, #070a13 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             text-align: center;
-            margin-top: 50px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partners-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            height: 1px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
         }
 
         .partners-header {
@@ -1551,9 +1567,12 @@
                     <span class="dot" data-index="2"></span>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- שורת שותפים/לקוחות צפים -->
-            <section class="partners-section">
+    <!-- אזור השותפים לדרך (Client Logos) - רקע כהה נפרד -->
+    <section class="partners-section">
+        <div class="container" style="padding-top: 40px; padding-bottom: 40px;">
                 <div class="partners-header">
                     <p class="partners-title">חברות וארגונים שנותנים בנו אמון</p>
                     <div class="partners-scroll-hint">
@@ -1633,11 +1652,8 @@
                         </div>
                     </div>
                 </div>
-                </div>
-            </section>
-
-        </div>
-    </section>
+            </div>
+        </section>
 
     <!-- Container שלישי ליצירת קשר -->
     <div class="container" style="padding-top: 60px; padding-bottom: 80px;">
